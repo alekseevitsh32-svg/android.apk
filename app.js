@@ -6,12 +6,14 @@ const currencyBtn = document.getElementById('currency-toggle-btn');
 
 let currentCurrency = 'RUB'; // При старте всегда рубли
 
+// Клик по кнопке согласия
 if (acceptBtn && modal) {
     acceptBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
     });
 }
 
+// Кнопка очистки полей
 if (clearBtn) {
     clearBtn.addEventListener('click', () => {
         inputs.forEach(input => input.value = '');
@@ -23,7 +25,7 @@ if (clearBtn) {
     });
 }
 
-// ИСПРАВЛЕННАЯ ЛОГИКА ТЕКСТА КНОПКИ
+// НАДЁЖНАЯ ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ВАЛЮТЫ
 if (currencyBtn) {
     currencyBtn.addEventListener('click', () => {
         const signs = document.querySelectorAll('.currency-sign');
@@ -32,25 +34,30 @@ if (currencyBtn) {
         
         if (currentCurrency === 'RUB') {
             currentCurrency = 'USD';
-            // Включили доллары — значит кнопка должна предлагать вернуться в рубли
+            // Меняем текст на самой кнопке
             document.getElementById('currency-name').innerText = '🪙 Считать в рублях (₽)';
+            // Меняем подсказки в полях ввода
             priceAInput.placeholder = 'Например, 5.50';
             priceBInput.placeholder = 'Например, 12.99';
             
+            // Прямая замена значков валюты без сложных проверок текста
             signs.forEach(sign => {
-                sign.innerText = sign.tagName === 'SPAN' && sign.classList.contains('currency-sign') && sign.parentElement.innerText.includes('Цена (') ? 'USD' : '$';
+                sign.innerText = '$';
             });
         } else {
             currentCurrency = 'RUB';
-            // Включили рубли — кнопка снова предлагает уйти в доллары
+            // Меняем текст на самой кнопке
             document.getElementById('currency-name').innerText = '💵 Считать в долларах ($)';
+            // Меняем подсказки в полях ввода
             priceAInput.placeholder = 'Например, 350';
             priceBInput.placeholder = 'Например, 890';
             
+            // Прямая замена значков валюты назад на рубли
             signs.forEach(sign => {
-                sign.innerText = sign.tagName === 'SPAN' && sign.classList.contains('currency-sign') && sign.parentElement.innerText.includes('Цена (') ? 'руб' : '₽';
+                sign.innerText = '₽';
             });
         }
+        // Пересчитываем значения, если в полях уже были цифры
         calculate();
     });
 }
