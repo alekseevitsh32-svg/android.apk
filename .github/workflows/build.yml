@@ -41,11 +41,8 @@ jobs:
 
       - name: Generate App Icons
         run: |
-          npm install -g cordova-res
-          mkdir -p resources
-          cp icon.png resources/icon.png
-          cordova-res android --skip-splash
-          cp -r resources/android/* android/app/src/main/res/
+          npm install @capacitor/assets
+          npx capacitor-assets generate --icon
         continue-on-error: true
 
       - name: Sync Code to Android
