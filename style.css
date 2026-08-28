@@ -101,7 +101,6 @@ header p {
     box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 
-/* КЛАСС ДЛЯ СКРЫТИЯ СВЕРХУ ПЕРЕБИВАЕТ ДРУГИЕ СТИЛИ */
 .hidden {
     display: none !important;
 }
@@ -147,6 +146,7 @@ header p {
 }
 
 #accept-policy-btn {
+    display: block;
     background: #28a745;
     color: white;
     border: none;
@@ -156,9 +156,16 @@ header p {
     border-radius: 10px;
     cursor: pointer;
     width: 100%;
+    text-align: center;
+    box-sizing: border-box;
     transition: background 0.2s;
 }
 
 #accept-policy-btn:hover {
     background: #218838;
+}
+
+/* МАГИЯ АВТОМАТИЧЕСКОГО СКРЫТИЯ ОКНА ПРИ НАЖАТИИ КНОПКИ */
+#close-modal-trigger:checked ~ #policy-modal {
+    display: none !important;
 }
