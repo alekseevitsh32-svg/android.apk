@@ -1,0 +1,54 @@
+name: Build Android APK
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Capacitor
+        run: |
+          npm install @capacitor/core @capacitor/cli
+          npm install @capacitor/android
+          npx cap init "Выгодный Шоппинг" "ru.dima.smartshopping" --web-dir=.
+
+      - name: Add Android Platform
+        run: npx cap add android
+
+      - name: Generate App Icons
+        run: |
+          npm install -g cordova-res
+          mkdir -p resources
+          cp icon.png resources/icon.png
+          cordova-res android --skip-splash
+          cp -r resources/android/* android/app/src/main/res/
+        continue-on-error: true
+
+      - name: Sync Code to Android
+        run: npx cap sync android
+
+      - name: Build Android Release APK
+        run: |
+          cd android && ./gradlew assembleRelease
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
