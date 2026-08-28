@@ -34,7 +34,6 @@ header p {
     margin-bottom: 10px;
 }
 
-/* СТИЛЬ ДЛЯ КНОПКИ ВАЛЮТЫ */
 .currency-button {
     background: #007bff;
     color: white;
@@ -140,8 +139,11 @@ header p {
     background: #5a6268;
 }
 
+/* ЭТОТ КЛАСС ТЕПЕРЬ ПОЛНОСТЬЮ ИСПРАВЛЕН */
 .hidden {
     display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important; /* Отключает любые тапы по невидимой стене */
 }
 
 .modal-overlay {
