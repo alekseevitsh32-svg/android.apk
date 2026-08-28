@@ -1,28 +1,8 @@
-// Запускаем код только когда страница на 100% загрузилась
-window.onload = function() {
-    const inputs = document.querySelectorAll('input');
-    const modal = document.getElementById('policy-modal');
-    const acceptBtn = document.getElementById('accept-policy-btn');
+const inputs = document.querySelectorAll('input');
 
-    // Проверяем, принимал ли пользователь условия раньше
-    const isAccepted = localStorage.getItem('policyAccepted');
-    if (isAccepted === 'true' && modal) {
-        modal.classList.add('hidden');
-    }
-
-    // Железобетонный клик по кнопке
-    if (acceptBtn && modal) {
-        acceptBtn.onclick = function() {
-            localStorage.setItem('policyAccepted', 'true');
-            modal.classList.add('hidden');
-        };
-    }
-
-    // Слушаем ввод цифр в калькулятор
-    inputs.forEach(input => {
-        input.oninput = calculate;
-    });
-};
+inputs.forEach(input => {
+    input.addEventListener('input', calculate);
+});
 
 function calculate() {
     const priceA = parseFloat(document.getElementById('price-a').value) || 0;
