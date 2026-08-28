@@ -1,22 +1,28 @@
-const inputs = document.querySelectorAll('input');
-
-document.addEventListener('DOMContentLoaded', () => {
-    const isAccepted = localStorage.getItem('policyAccepted');
+// Запускаем код только когда страница на 100% загрузилась
+window.onload = function() {
+    const inputs = document.querySelectorAll('input');
     const modal = document.getElementById('policy-modal');
-    
-    if (isAccepted === 'true') {
+    const acceptBtn = document.getElementById('accept-policy-btn');
+
+    // Проверяем, принимал ли пользователь условия раньше
+    const isAccepted = localStorage.getItem('policyAccepted');
+    if (isAccepted === 'true' && modal) {
         modal.classList.add('hidden');
     }
-});
 
-document.getElementById('accept-policy-btn').addEventListener('click', () => {
-    localStorage.setItem('policyAccepted', 'true');
-    document.getElementById('policy-modal').classList.add('hidden');
-});
+    // Железобетонный клик по кнопке
+    if (acceptBtn && modal) {
+        acceptBtn.onclick = function() {
+            localStorage.setItem('policyAccepted', 'true');
+            modal.classList.add('hidden');
+        };
+    }
 
-inputs.forEach(input => {
-    input.addEventListener('input', calculate);
-});
+    // Слушаем ввод цифр в калькулятор
+    inputs.forEach(input => {
+        input.oninput = calculate;
+    });
+};
 
 function calculate() {
     const priceA = parseFloat(document.getElementById('price-a').value) || 0;
