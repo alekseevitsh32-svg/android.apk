@@ -1,6 +1,5 @@
 {
   "appId": "ru.dima.smartshopping",
   "appName": "Выгодный Шоппинг",
-  "webDir": ".",
-  "bundledWebRuntime": false
+  "webDir": "www"
 }
