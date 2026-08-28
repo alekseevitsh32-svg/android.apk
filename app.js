@@ -1,22 +1,27 @@
-// Пишем логику БЕЗ window.onload, чтобы она срабатывала мгновенно
 const inputs = document.querySelectorAll('input');
 const modal = document.getElementById('policy-modal');
 const acceptBtn = document.getElementById('accept-policy-btn');
+const clearBtn = document.getElementById('clear-btn');
 
-// Проверяем локальную память: если пользователь УЖЕ нажимал кнопку раньше, скрываем ее
-if (localStorage.getItem('policyAccepted') === 'true' && modal) {
-    modal.classList.add('hidden');
-}
-
-// Повесили событие клика на кнопку
+// ПРОСТЕЙШИЙ КЛИК: нажал кнопку — плашка скрылась. Без запоминания в память устройства.
 if (acceptBtn && modal) {
     acceptBtn.addEventListener('click', () => {
-        localStorage.setItem('policyAccepted', 'true');
         modal.classList.add('hidden');
     });
 }
 
-// Логика калькулятора покупок
+// Кнопка очистки
+if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+        inputs.forEach(input => input.value = '');
+        document.getElementById('unit-price-a').innerText = '0';
+        document.getElementById('unit-price-b').innerText = '0';
+        document.getElementById('card-a').classList.remove('winner');
+        document.getElementById('card-b').classList.remove('winner');
+        document.getElementById('final-verdict').classList.add('hidden');
+    });
+}
+
 inputs.forEach(input => {
     input.addEventListener('input', calculate);
 });
