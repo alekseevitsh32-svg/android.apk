@@ -1,5 +1,22 @@
+// Пишем логику БЕЗ window.onload, чтобы она срабатывала мгновенно
 const inputs = document.querySelectorAll('input');
+const modal = document.getElementById('policy-modal');
+const acceptBtn = document.getElementById('accept-policy-btn');
 
+// Проверяем локальную память: если пользователь УЖЕ нажимал кнопку раньше, скрываем ее
+if (localStorage.getItem('policyAccepted') === 'true' && modal) {
+    modal.classList.add('hidden');
+}
+
+// Повесили событие клика на кнопку
+if (acceptBtn && modal) {
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('policyAccepted', 'true');
+        modal.classList.add('hidden');
+    });
+}
+
+// Логика калькулятора покупок
 inputs.forEach(input => {
     input.addEventListener('input', calculate);
 });
