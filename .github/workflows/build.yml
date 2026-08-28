@@ -11,11 +11,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      # ИСПРАВЛЕНО: Ставим Java 21, чтобы прочитать новейшую библиотеку bcprov
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -48,10 +49,11 @@ jobs:
       - name: Sync Code to Android
         run: npx cap sync android
 
-      # ИСПРАВЛЕНО: Принудительно закидываем путь к Java 17 во внутренние файлы настроек Android
-      - name: Force Java 17 in Gradle Properties
+      # ИСПРАВЛЕНО: Прописываем Java 21 во все конфигурационные файлы проекта Android
+      - name: Force Java 21 in Android Project
         run: |
-          echo "org.gradle.java.home=/usr/lib/jvm/temurin-17-jdk-amd64" >> android/gradle.properties
+          echo "org.gradle.java.home=/usr/lib/jvm/temurin-21-jdk-amd64" >> android/gradle.properties
+          sed -i 's/compatibility = .*/compatibility = JavaVersion.VERSION_21/g' android/app/build.gradle || true
 
       - name: Build Android Release APK
         run: |
