@@ -1,0 +1,11 @@
+{
+  "name": "smart-shopping-calc",
+  "version": "1.0.0",
+  "description": "Умный калькулятор выгодных покупок",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build step needed for pure HTML'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
