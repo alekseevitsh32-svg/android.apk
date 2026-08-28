@@ -4,9 +4,9 @@ const acceptBtn = document.getElementById('accept-policy-btn');
 const clearBtn = document.getElementById('clear-btn');
 const currencyBtn = document.getElementById('currency-toggle-btn');
 
-let currentCurrency = 'RUB'; // При старте всегда рубли
+let currentCurrency = 'RUB';
 
-// Клик по кнопке согласия
+// Кнопка согласия: просто убирает плашку из видимости и убирает pointer-events через класс .hidden
 if (acceptBtn && modal) {
     acceptBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
@@ -25,7 +25,7 @@ if (clearBtn) {
     });
 }
 
-// НАДЁЖНАЯ ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ВАЛЮТЫ
+// Кнопка валюты
 if (currencyBtn) {
     currencyBtn.addEventListener('click', () => {
         const signs = document.querySelectorAll('.currency-sign');
@@ -34,30 +34,23 @@ if (currencyBtn) {
         
         if (currentCurrency === 'RUB') {
             currentCurrency = 'USD';
-            // Меняем текст на самой кнопке
             document.getElementById('currency-name').innerText = '🪙 Считать в рублях (₽)';
-            // Меняем подсказки в полях ввода
             priceAInput.placeholder = 'Например, 5.50';
             priceBInput.placeholder = 'Например, 12.99';
             
-            // Прямая замена значков валюты без сложных проверок текста
             signs.forEach(sign => {
                 sign.innerText = '$';
             });
         } else {
             currentCurrency = 'RUB';
-            // Меняем текст на самой кнопке
             document.getElementById('currency-name').innerText = '💵 Считать в долларах ($)';
-            // Меняем подсказки в полях ввода
             priceAInput.placeholder = 'Например, 350';
             priceBInput.placeholder = 'Например, 890';
             
-            // Прямая замена значков валюты назад на рубли
             signs.forEach(sign => {
                 sign.innerText = '₽';
             });
         }
-        // Пересчитываем значения, если в полях уже были цифры
         calculate();
     });
 }
