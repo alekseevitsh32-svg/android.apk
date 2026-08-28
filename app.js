@@ -4,16 +4,14 @@ const acceptBtn = document.getElementById('accept-policy-btn');
 const clearBtn = document.getElementById('clear-btn');
 const currencyBtn = document.getElementById('currency-toggle-btn');
 
-let currentCurrency = 'RUB'; // Текущая валюта по умолчанию
+let currentCurrency = 'RUB'; // При старте всегда рубли
 
-// Клик по кнопке согласия
 if (acceptBtn && modal) {
     acceptBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
     });
 }
 
-// Кнопка очистки полей
 if (clearBtn) {
     clearBtn.addEventListener('click', () => {
         inputs.forEach(input => input.value = '');
@@ -25,7 +23,7 @@ if (clearBtn) {
     });
 }
 
-// КНОПКА ПЕРЕКЛЮЧЕНИЯ ВАЛЮТЫ
+// ИСПРАВЛЕННАЯ ЛОГИКА ТЕКСТА КНОПКИ
 if (currencyBtn) {
     currencyBtn.addEventListener('click', () => {
         const signs = document.querySelectorAll('.currency-sign');
@@ -34,17 +32,18 @@ if (currencyBtn) {
         
         if (currentCurrency === 'RUB') {
             currentCurrency = 'USD';
-            document.getElementById('currency-name').innerText = 'Долларах ($)';
+            // Включили доллары — значит кнопка должна предлагать вернуться в рубли
+            document.getElementById('currency-name').innerText = '🪙 Считать в рублях (₽)';
             priceAInput.placeholder = 'Например, 5.50';
             priceBInput.placeholder = 'Например, 12.99';
             
-            // Меняем текст на экранах на значки долларов
             signs.forEach(sign => {
                 sign.innerText = sign.tagName === 'SPAN' && sign.classList.contains('currency-sign') && sign.parentElement.innerText.includes('Цена (') ? 'USD' : '$';
             });
         } else {
             currentCurrency = 'RUB';
-            document.getElementById('currency-name').innerText = 'Рублях (₽)';
+            // Включили рубли — кнопка снова предлагает уйти в доллары
+            document.getElementById('currency-name').innerText = '💵 Считать в долларах ($)';
             priceAInput.placeholder = 'Например, 350';
             priceBInput.placeholder = 'Например, 890';
             
@@ -52,7 +51,6 @@ if (currencyBtn) {
                 sign.innerText = sign.tagName === 'SPAN' && sign.classList.contains('currency-sign') && sign.parentElement.innerText.includes('Цена (') ? 'руб' : '₽';
             });
         }
-        // Пересчитываем всё сразу после смены валюты
         calculate();
     });
 }
