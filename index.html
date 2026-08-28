@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Скрытый чекбокс для закрытия окна без JavaScript -->
+    <input type="checkbox" id="close-modal-trigger" style="display: none;">
+
+    <!-- ТАБЛИЧКА СОГЛАСИЯ С ПОЛИТИКОЙ -->
+    <div id="policy-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Добро пожаловать!</h3>
+            <p>Для работы приложения, пожалуйста, подтвердите согласие с нашей <a href="privacy.html">Политикой конфиденциальности</a>. Мы не собираем ваши личные данные.</p>
+            <!-- Тег label теперь работает как кнопка и закрывает окно при тапе -->
+            <label for="close-modal-trigger" id="accept-policy-btn">Принять и открыть калькулятор</label>
+        </div>
+    </div>
+
     <div class="app-container">
         <header>
             <h1>🛒 Какой товар выгоднее?</h1>
@@ -51,16 +65,6 @@
         <div id="final-verdict" class="verdict hidden"></div>
     </div>
 
-    <!-- ТАБЛИЧКА СОГЛАСИЯ С ПОЛИТИКОЙ -->
-    <div id="policy-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h3>Добро пожаловать!</h3>
-            <p>Для работы приложения, пожалуйста, подтвердите согласие с нашей <a href="privacy.html">Политикой конфиденциальности</a>. Мы не собираем ваши личные данные.</p>
-            <button id="accept-policy-btn">Принять и открыть калькулятор</button>
-        </div>
-    </div>
-
-    <!-- ДОБАВИЛИ DEFER — ЭТО КРИТИЧЕСКИ ВАЖНО -->
     <script defer src="app.js"></script>
 </body>
 </html>
