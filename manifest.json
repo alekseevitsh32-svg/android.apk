@@ -1,0 +1,16 @@
+{
+  "short_name": "Шоппинг",
+  "name": "Выгодный Шоппинг",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#f4f6f9",
+  "display": "standalone",
+  "theme_color": "#007bff",
+  "orientation": "portrait"
+}
