@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Выгодный Шоппинг</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>🛒 Какой товар выгоднее?</h1>
+            <p>Сравните цену за 1 кг / 1 литр / 1 штуку</p>
+        </header>
+
+        <main>
+            <!-- ТОВАР А -->
+            <section class="product-card" id="card-a">
+                <h2>Товар А</h2>
+                <div class="input-group">
+                    <label>Цена (руб):</label>
+                    <input type="number" id="price-a" placeholder="Например, 350" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>Вес / Кол-во (г, мл, шт):</label>
+                    <input type="number" id="weight-a" placeholder="Например, 900" inputmode="decimal">
+                </div>
+                <div class="result-box">
+                    Цена за килограмм: <span id="unit-price-a">0</span> ₽
+                </div>
+            </section>
+
+            <!-- ТОВАР Б -->
+            <section class="product-card" id="card-b">
+                <h2>Товар Б</h2>
+                <div class="input-group">
+                    <label>Цена (руб):</label>
+                    <input type="number" id="price-b" placeholder="Например, 890" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>Вес / Кол-во (г, мл, шт):</label>
+                    <input type="number" id="weight-b" placeholder="Например, 2400" inputmode="decimal">
+                </div>
+                <div class="result-box">
+                    Цена за килограмм: <span id="unit-price-b">0</span> ₽
+                </div>
+            </section>
+        </main>
+
+        <!-- ИТОГОВОЕ РЕШЕНИЕ -->
+        <div id="final-verdict" class="verdict hidden"></div>
+    </div>
+
+    <!-- ТАБЛИЧКА СОГЛАСИЯ С ПОЛИТИКОЙ -->
+    <div id="policy-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Добро пожаловать!</h3>
+            <p>Для работы приложения, пожалуйста, подтвердите согласие с нашей <a href="privacy.html">Политикой конфиденциальности</a>. Мы не собираем ваши личные данные.</p>
+            <button id="accept-policy-btn">Принять и открыть калькулятор</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
