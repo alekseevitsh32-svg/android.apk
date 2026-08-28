@@ -48,14 +48,10 @@ jobs:
       - name: Sync Code to Android
         run: npx cap sync android
 
-      # 🔥 НАШ ХАК: Заставляем весь проект использовать стабильную версию библиотеки 1.70 вместо глючной 1.79
-      - name: Force Safe Library Version in Android Project
-        run: |
-          echo "configurations.all { resolutionStrategy { force 'org.bouncycastle:bcprov-jdk18on:1.70' } }" >> android/build.gradle
-
+      # ИСПРАВЛЕНО: Добавили флаг отключения кэша конфигурации, чтобы обойти баг Capacitor
       - name: Build Android Release APK
         run: |
-          cd android && ./gradlew assembleRelease
+          cd android && ./gradlew assembleRelease --no-configuration-cache
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
