@@ -6,7 +6,7 @@ const currencyBtn = document.getElementById('currency-toggle-btn');
 
 let currentCurrency = 'RUB';
 
-// Кнопка согласия: просто убирает плашку из видимости и убирает pointer-events через класс .hidden
+// Клик по кнопке согласия
 if (acceptBtn && modal) {
     acceptBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
@@ -25,7 +25,7 @@ if (clearBtn) {
     });
 }
 
-// Кнопка валюты
+// Кнопка переключения валюты
 if (currencyBtn) {
     currencyBtn.addEventListener('click', () => {
         const signs = document.querySelectorAll('.currency-sign');
@@ -94,4 +94,9 @@ function calculate() {
             verdict.innerText = "⚖️ Цены абсолютно одинаковы!";
         }
     }
+}
+
+// СЛУЖЕБНЫЙ КОД PWA ДЛЯ ЗАПУСКА АВТОНОМНОГО РЕЖИМА
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
 }
