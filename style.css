@@ -31,6 +31,25 @@ header p {
     font-size: 0.9rem;
     color: #666;
     margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* СТИЛЬ ДЛЯ КНОПКИ ВАЛЮТЫ */
+.currency-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,123,255,0.3);
+    transition: background 0.2s;
+}
+
+.currency-button:hover {
+    background: #0056b3;
 }
 
 .product-card {
