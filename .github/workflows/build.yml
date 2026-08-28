@@ -22,11 +22,19 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Prepare WWW Folder
+        run: |
+          mkdir -p www
+          cp index.html www/
+          cp style.css www/
+          cp app.js www/
+          cp privacy.html www/
+
       - name: Install Capacitor
         run: |
           npm install @capacitor/core @capacitor/cli
           npm install @capacitor/android
-          npx cap init "Выгодный Шоппинг" "ru.dima.smartshopping" --web-dir=.
+          npx cap init "Выгодный Шоппинг" "ru.dima.smartshopping" --web-dir=www
 
       - name: Add Android Platform
         run: npx cap add android
