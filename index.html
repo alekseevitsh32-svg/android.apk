@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Выгодный Шоппинг</title>
     <link rel="stylesheet" href="style.css">
+    <!-- ПОДКЛЮЧИЛИ МАНИФЕСТ ДЛЯ УСТАНОВКИ НА РАБОЧИЙ СТОЛ -->
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -21,8 +23,6 @@
         <header>
             <h1>🛒 Какой товар выгоднее?</h1>
             <p>Сравните цену за 1 кг / 1 литр / 1 штуку</p>
-            
-            <!-- ИСПРАВЛЕНО: Кнопка сразу предлагает переключиться на доллары -->
             <button id="currency-toggle-btn" class="currency-button"><span id="currency-name">💵 Считать в долларах ($)</span></button>
         </header>
 
@@ -31,7 +31,7 @@
             <section class="product-card" id="card-a">
                 <h2>Товар А</h2>
                 <div class="input-group">
-                    <label>Цена (<span class="currency-sign">руб</span>):</label>
+                    <label>Цена (<span class="currency-sign">₽</span>):</label>
                     <input type="number" id="price-a" placeholder="Например, 350" inputmode="decimal">
                 </div>
                 <div class="input-group">
@@ -47,7 +47,7 @@
             <section class="product-card" id="card-b">
                 <h2>Товар Б</h2>
                 <div class="input-group">
-                    <label>Цена (<span class="currency-sign">руб</span>):</label>
+                    <label>Цена (<span class="currency-sign">₽</span>):</label>
                     <input type="number" id="price-b" placeholder="Например, 890" inputmode="decimal">
                 </div>
                 <div class="input-group">
