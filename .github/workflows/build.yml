@@ -11,12 +11,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ИСПРАВЛЕНО: Ставим Java 21, чтобы прочитать новейшую библиотеку bcprov
-      - name: Set up JDK 21
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17'
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -49,11 +48,10 @@ jobs:
       - name: Sync Code to Android
         run: npx cap sync android
 
-      # ИСПРАВЛЕНО: Прописываем Java 21 во все конфигурационные файлы проекта Android
-      - name: Force Java 21 in Android Project
+      # 🔥 НАШ ХАК: Заставляем весь проект использовать стабильную версию библиотеки 1.70 вместо глючной 1.79
+      - name: Force Safe Library Version in Android Project
         run: |
-          echo "org.gradle.java.home=/usr/lib/jvm/temurin-21-jdk-amd64" >> android/gradle.properties
-          sed -i 's/compatibility = .*/compatibility = JavaVersion.VERSION_21/g' android/app/build.gradle || true
+          echo "configurations.all { resolutionStrategy { force 'org.bouncycastle:bcprov-jdk18on:1.70' } }" >> android/build.gradle
 
       - name: Build Android Release APK
         run: |
