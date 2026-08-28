@@ -101,6 +101,7 @@ header p {
     box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 
+/* КЛАСС ДЛЯ СКРЫТИЯ СВЕРХУ ПЕРЕБИВАЕТ ДРУГИЕ СТИЛИ */
 .hidden {
     display: none !important;
 }
@@ -116,10 +117,6 @@ header p {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-}
-
-.modal-overlay.hidden {
-    display: none !important;
 }
 
 .modal-content {
